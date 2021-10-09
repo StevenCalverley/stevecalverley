@@ -5,7 +5,12 @@ import Image from 'next/image';
 const name = 'Steven Calverley';
 export const siteTitle = 'Steven Calverley';
 
-export default function Layout({ children, home }) {
+interface LayoutProps {
+  home?: boolean;
+  children?: React.ReactChild;
+}
+
+export default function Layout({ children, home }: LayoutProps) {
   return (
     <div className="min-h-screen bg-gray-50">
       <Head>
