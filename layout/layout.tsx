@@ -7,7 +7,7 @@ export const siteTitle = 'Steven Calverley';
 
 interface LayoutProps {
   home?: boolean;
-  children?: React.ReactChild;
+  children?: React.ReactChild[];
 }
 
 export default function Layout({ children, home }: LayoutProps) {
