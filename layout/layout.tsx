@@ -1,11 +1,16 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import Nav from './Nav';
+import Image from 'next/image';
 
 const name = 'Steven Calverley';
 export const siteTitle = 'Steven Calverley';
 
-export default function Layout({ children, home }) {
+interface LayoutProps {
+  home?: boolean;
+  children?: React.ReactChild[];
+}
+
+export default function Layout({ children, home }: LayoutProps) {
   return (
     <div className="min-h-screen bg-gray-50">
       <Head>
@@ -24,20 +29,22 @@ export default function Layout({ children, home }) {
       <header className="pt-8 flex justify-center items-center flex-col">
         {home ? (
           <>
-            <img
-              src="/images/SteveCalverley.jpg"
-              className="h-48 w-48 rounded-full"
-              alt={name}
-            />
+            <div className="relative h-48 w-48 rounded-full overflow-hidden">
+              <Image
+                src="/images/SteveCalverley.jpg"
+                layout="fill"
+                alt={name}
+              />
+            </div>
             <h1 className="mt-4 text-4xl font-bold">{name}</h1>
           </>
         ) : (
           <>
             <Link href="/">
-              <a>
-                <img
+              <a className="relative h-32 w-32 rounded-full overflow-hidden">
+                <Image
                   src="/images/SteveCalverley.jpg"
-                  className="h-32 w-32 rounded-full"
+                  layout="fill"
                   alt={name}
                 />
               </a>
