@@ -4,15 +4,27 @@ import {
   InboxInIcon,
   LinkIcon,
 } from '@heroicons/react/outline';
+import { Transition } from '@headlessui/react';
 interface IAuthorProps {
   author: IAuthor;
 }
 export default function Author({ author }: IAuthorProps) {
   const { name, profile } = author;
+
   return (
     <>
       <div className="relative min-h-[288px] font-bold text-blue-900 font-display">
-        <div className="absolute top-0 h-72 w-full sm:w-72 sm:rounded-full sm:shadow-lg bg-gradient-radial from-yellow-200 to-yellow-400 ring-2 ring-yellow-300"></div>
+        <Transition
+          appear={true}
+          show={true}
+          enter="transform-gpu transition ease-in-out duration-[2000ms]"
+          enterFrom="opacity-0 -translate-x-52"
+          enterTo="opacity-100 translate-x-0"
+        >
+          <div
+            className={`absolute h-72 w-full sm:w-72 sm:rounded-full sm:shadow-lg bg-gradient-radial from-yellow-200 to-yellow-400 ring-2 ring-yellow-300`}
+          ></div>
+        </Transition>
         <div className="relative pt-12 px-4 sm:pl-12 md:pl-20 lg:pl-24 space-y-2">
           <p className="text-2xl sm:text-4xl">Hello.</p>
           <h2 className="text-3xl sm:text-5xl lg:text-6xl">I&apos;m {name},</h2>
