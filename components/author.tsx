@@ -12,14 +12,14 @@ export default function Author({ author }: IAuthorProps) {
   return (
     <>
       <div className="relative min-h-[288px] font-bold text-blue-900 font-display">
-        <div className="absolute top-0 h-72 w-full sm:w-72 sm:rounded-full bg-yellow-300"></div>
+        <div className="absolute top-0 h-72 w-full sm:w-72 sm:rounded-full sm:shadow-lg bg-gradient-radial from-yellow-200 to-yellow-400 ring-2 ring-yellow-300"></div>
         <div className="relative pt-12 px-4 sm:pl-12 md:pl-20 lg:pl-24 space-y-2">
           <p className="text-2xl sm:text-4xl">Hello.</p>
-          <h2 className="text-3xl sm:text-5xl">I&apos;m {name},</h2>
-          <p className="text-xl sm:text-3xl">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl">I&apos;m {name},</h2>
+          <p className="text-xl sm:text-5xl">
             <span>&lt;Web &#47;&gt;</span>
             <br />
-            <span>Developer</span>
+            <span>Developer.</span>
           </p>
         </div>
       </div>
@@ -59,7 +59,9 @@ export default function Author({ author }: IAuthorProps) {
         <div className="mt-8 md:mt-0 lg:col-span-3 2xl:col-span-6 max-w-2xl">
           <h3 className="text-blue-900 font-bold text-xl">My Profile.</h3>
           {profile && (
-            <p className="mt-2 text-sm text-gray-700 font-light">{profile}</p>
+            <p className="mt-2 md:text-sm text-gray-700 font-light">
+              {profile}
+            </p>
           )}
         </div>
       </section>

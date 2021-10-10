@@ -14,6 +14,9 @@ module.exports = {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
         display: ['Montserrat', 'serif'],
       },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
     },
   },
   variants: {
