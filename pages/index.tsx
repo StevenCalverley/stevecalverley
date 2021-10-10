@@ -1,16 +1,50 @@
+import { GetStaticPropsContext } from 'next';
 import Head from 'next/head';
+import { graphcmsClient } from '../lib/client';
+import { getAuthorByEmail } from '../lib/queries';
+import type { IAuthor } from '../lib/types';
 import Layout from '../layout/layout';
+import Author from '../components/author';
 
-export default function Home() {
+interface IndexProps {
+  author: IAuthor;
+}
+
+export default function Home({ author }: IndexProps) {
   return (
-    <Layout home>
+    <>
       <Head>
-        <title>Steven Calverley</title>
+        <title>{author.name}</title>
       </Head>
 
-      <main className="h-full flex flex-col items-center justify-center">
-        <p className="text-gray-700 text-2xl">Coming Soon</p>
+      <main className="mx-auto sm:py-16 container">
+        <Author author={author} />
       </main>
-    </Layout>
+    </>
   );
+}
+
+export async function getStaticProps({
+  params,
+  preview = false,
+}: GetStaticPropsContext) {
+  const client = graphcmsClient(preview);
+
+  const { author } = await client.request(getAuthorByEmail, {
+    email: 'emailme@stevencalverley.com',
+  });
+
+  if (!author) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      author,
+      preview,
+    },
+    revalidate: 60,
+  };
 }

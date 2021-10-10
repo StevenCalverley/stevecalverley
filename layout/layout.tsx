@@ -12,7 +12,7 @@ interface LayoutProps {
 
 export default function Layout({ children, home }: LayoutProps) {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="Steven Calverley Personal Website" />
@@ -24,7 +24,6 @@ export default function Layout({ children, home }: LayoutProps) {
         />
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css"></link>
       </Head>
       <header className="pt-8 flex justify-center items-center flex-col">
         {home ? (
