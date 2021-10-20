@@ -7,17 +7,34 @@ import type {
   IAuthorResponse,
   IExperience,
   IExperienceResponse,
+  IActivity,
+  IActivitiesResponse,
+  ISkill,
+  ISkillResponse,
 } from '../lib/types';
 import Author from '../components/author/author';
 import Experience from '../components/experiences/experiences';
-import { parseExperienceResponse } from '../utils/parseExperienceResponse';
+import Skills from '../components/skills/skills';
+import { getSkillsByType } from '../lib/queries/getSkills';
+import Activities from '../components/activities/activities';
+import { getActivities } from '../lib/queries/getActivities';
 
 interface IndexProps {
   author: IAuthor;
   experiences: IExperience[];
+  skills: {
+    business: ISkill[];
+    development: ISkill[];
+  };
+  activities: IActivity[];
 }
 
-export default function Home({ author, experiences }: IndexProps) {
+export default function Home({
+  author,
+  experiences,
+  skills,
+  activities,
+}: IndexProps) {
   return (
     <>
       <Head>
@@ -26,6 +43,8 @@ export default function Home({ author, experiences }: IndexProps) {
       <main>
         <Author author={author} />
         <Experience experiences={experiences} />
+        <Skills skills={skills} />
+        <Activities activities={activities} />
       </main>
     </>
   );
@@ -45,6 +64,23 @@ export async function getStaticProps({
     getExperiences
   );
 
+  const { skills: businessSkills } = await client.request<ISkillResponse>(
+    getSkillsByType,
+    {
+      type: 'Business',
+    }
+  );
+  const { skills: developmentSkills } = await client.request<ISkillResponse>(
+    getSkillsByType,
+    {
+      type: 'Development',
+    }
+  );
+
+  const { activities } = await client.request<IActivitiesResponse>(
+    getActivities
+  );
+
   if (!author && !experiences) {
     return {
       notFound: true,
@@ -55,6 +91,11 @@ export async function getStaticProps({
     props: {
       author,
       experiences,
+      skills: {
+        business: businessSkills,
+        development: developmentSkills,
+      },
+      activities,
       preview,
     },
     revalidate: 60,

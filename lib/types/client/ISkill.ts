@@ -8,3 +8,7 @@ export interface ISkill {
   level: number;
   type: SkillType;
 }
+
+export interface ISkillResponse {
+  skills: ISkill[];
+}

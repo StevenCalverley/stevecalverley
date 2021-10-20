@@ -44,7 +44,7 @@ export default function Author({ author }: IAuthorProps) {
         as="section"
         appear={true}
         show={true}
-        className="md:mx-auto max-w-5xl my-8 px-4 font-display"
+        className="md:mx-auto max-w-5xl my-28 px-4 font-display"
       >
         <div className="md:pl-20 lg:pl-28 md:grid md:grid-cols-2 lg:grid-cols-6 2xl:grid-cols-12">
           <AuthorDetail

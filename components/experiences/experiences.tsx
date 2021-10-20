@@ -81,13 +81,15 @@ function renderExperiences(experiences: IExperience[]): JSX.Element[] {
   });
 }
 
-export default function Experience({ experiences }: ExperienceProps) {
-  const { ref, inView, entry } = useInView({
+export default function Experience({
+  experiences,
+}: ExperienceProps): JSX.Element {
+  const { ref, inView } = useInView({
     triggerOnce: true,
     rootMargin: '-50% 0px',
   });
   return (
-    <section className="px-4 pt-8 bg-gray-100 font-display min-h-screen">
+    <section className="px-4 pt-8 bg-gray-100 font-display min-h-[800px]">
       <div className="mx-auto max-w-5xl md:py-16 text-blue-900">
         <h2 className="font-bold text-xl md:text-center" ref={ref}>
           &lt;This is &#47;&gt;

@@ -7,14 +7,20 @@ import {
 import { IPosition } from './client/IPosition';
 import { ICompany } from './client/ICompany';
 import { ICaseStudy } from './client/ICaseStudy';
+import { ISkill, ISkillResponse } from './client/ISkill';
+import { IActivity, IActivitiesResponse } from './client/IActivity';
 
 export type {
   IAuthor,
+  IAuthorResponse,
   IExperience,
   IExperienceRaw,
+  IExperienceResponse,
   IPosition,
   ICompany,
   ICaseStudy,
-  IAuthorResponse,
-  IExperienceResponse,
+  ISkill,
+  ISkillResponse,
+  IActivity,
+  IActivitiesResponse,
 };
