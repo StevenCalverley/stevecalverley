@@ -1,5 +1,8 @@
 import { format } from 'date-fns';
+import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import { ICompany, IExperience, IPosition } from '../../lib/types';
+import { Transition } from '@headlessui/react';
+import { ElementRef, Ref, useRef, useState } from 'react';
 
 interface ExperienceProps {
   experiences: IExperience[];
@@ -31,8 +34,12 @@ function renderPosition(
     return (
       <div key={idx}>
         <p className="text-sm">
-          {endDate ? format(new Date(endDate), 'MMMM yyyy') : 'Current'} -{' '}
-          {format(new Date(startDate), 'MMMM yyyy')}
+          {format(new Date(startDate), 'MMMM yyyy')} -{' '}
+          {endDate ? (
+            format(new Date(endDate), 'MMMM yyyy')
+          ) : (
+            <strong>Current</strong>
+          )}
         </p>
         <p className="font-bold truncate">{title}</p>
         <h4 className="text-sm">{company.name}</h4>
@@ -45,8 +52,12 @@ function renderExperiences(experiences: IExperience[]): JSX.Element[] {
   return experiences.map((experience, idx) => {
     const { company, positions, responsibilities } = experience;
     return (
-      <article
+      <Transition.Child
+        as="article"
         key={idx}
+        enter="transform-gpu transition ease-in-out duration-[2000ms]"
+        enterFrom="opacity-0 translate-y-52"
+        enterTo="opacity-100 translate-y-0"
         className="relative py-6 md:py-0 grid grid-cols-1 md:grid md:grid-cols-2"
       >
         <div className="relative md:border-r-2 border-blue-900">
@@ -66,27 +77,48 @@ function renderExperiences(experiences: IExperience[]): JSX.Element[] {
         <div className="mt-8 md:px-4">
           {renderResponsibilities(responsibilities)}
         </div>
-      </article>
+      </Transition.Child>
     );
   });
 }
 
 export default function Experience({ experiences }: ExperienceProps) {
+  const sectionRef = useRef(null);
+  const [show, setShow] = useState(false);
+  useScrollPosition(
+    ({ prevPos, currPos }) => {
+      console.log(window.innerHeight - window.innerHeight / 4 - currPos.y);
+      console.log(window.innerHeight - window.innerHeight / 4 - currPos.y > 0);
+      setShow(window.innerHeight - window.innerHeight / 4 - currPos.y > 0);
+    },
+    [],
+    sectionRef,
+    false,
+    300
+  );
   return (
-    <section className="px-4 pt-8 bg-gray-100 font-display">
+    <section
+      className="px-4 pt-8 bg-gray-100 font-display min-h-screen"
+      ref={sectionRef}
+    >
       <div className="mx-auto max-w-5xl md:py-16 text-blue-900">
         <h2 className="font-bold text-xl md:text-center">
           &lt;This is &#47;&gt;
           <br />
           My Work Experience
         </h2>
-        <div className="mt-4 md:mt-12 divide-y md:divide-y-0 divide-blue-900">
+        <Transition
+          as="div"
+          appear={false}
+          show={show}
+          className="mt-4 md:mt-12 divide-y md:divide-y-0 divide-blue-900"
+        >
           {experiences.length > 0 ? (
             renderExperiences(experiences)
           ) : (
             <div>No Experiences</div>
           )}
-        </div>
+        </Transition>
       </div>
     </section>
   );

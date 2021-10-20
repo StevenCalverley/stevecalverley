@@ -10,7 +10,12 @@ export default function Author({ author }: IAuthorProps) {
 
   return (
     <>
-      <section className="relative md:mx-auto max-w-5xl md:mt-12 min-h-[288px] font-bold text-blue-900 font-display">
+      <Transition
+        as="section"
+        appear={true}
+        show={true}
+        className="relative md:mx-auto max-w-5xl md:mt-12 min-h-[288px] font-bold text-blue-900 font-display"
+      >
         <Transition.Child
           enter="transform-gpu transition ease-in-out duration-[2000ms]"
           enterFrom="opacity-0 md:-translate-x-52"
@@ -34,8 +39,13 @@ export default function Author({ author }: IAuthorProps) {
             </div>
           </Transition.Child>
         </div>
-      </section>
-      <section className="md:mx-auto max-w-5xl my-8 px-4 font-display">
+      </Transition>
+      <Transition
+        as="section"
+        appear={true}
+        show={true}
+        className="md:mx-auto max-w-5xl my-8 px-4 font-display"
+      >
         <div className="md:pl-20 lg:pl-28 md:grid md:grid-cols-2 lg:grid-cols-6 2xl:grid-cols-12">
           <AuthorDetail
             author={author}
@@ -52,7 +62,7 @@ export default function Author({ author }: IAuthorProps) {
             )}
           </div>
         </div>
-      </section>
+      </Transition>
     </>
   );
 }

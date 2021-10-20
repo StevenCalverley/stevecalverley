@@ -24,11 +24,10 @@ export default function Home({ author, experiences }: IndexProps) {
       <Head>
         <title>{author.name}</title>
       </Head>
-
-      <Transition as="main" appear={true} show={true}>
+      <main>
         <Author author={author} />
         <Experience experiences={experiences} />
-      </Transition>
+      </main>
     </>
   );
 }
