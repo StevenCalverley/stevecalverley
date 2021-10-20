@@ -1,15 +1,4 @@
-import { gql } from 'graphql-request';
+import { getAuthorByEmail } from './queries/getAuthorByEmail';
+import { getExperiences } from './queries/getExperiences';
 
-const getAuthorByEmail = gql`
-  query AuthorByEmail($email: String) {
-    author(where: { email: $email }) {
-      name
-      profile
-      website
-      email
-      contact
-    }
-  }
-`;
-
-export { getAuthorByEmail };
+export { getAuthorByEmail, getExperiences };

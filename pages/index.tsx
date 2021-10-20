@@ -1,25 +1,34 @@
 import { GetStaticPropsContext } from 'next';
 import Head from 'next/head';
 import { graphcmsClient } from '../lib/client';
-import { getAuthorByEmail } from '../lib/queries';
-import type { IAuthor } from '../lib/types';
-import Layout from '../layout/layout';
-import Author from '../components/author';
+import { getAuthorByEmail, getExperiences } from '../lib/queries';
+import type {
+  IAuthor,
+  IAuthorResponse,
+  IExperience,
+  IExperienceResponse,
+} from '../lib/types';
+import { Transition } from '@headlessui/react';
+import Author from '../components/author/author';
+import Experience from '../components/experiences/experiences';
+import { parseExperienceResponse } from '../utils/parseExperienceResponse';
 
 interface IndexProps {
   author: IAuthor;
+  experiences: IExperience[];
 }
 
-export default function Home({ author }: IndexProps) {
+export default function Home({ author, experiences }: IndexProps) {
   return (
     <>
       <Head>
         <title>{author.name}</title>
       </Head>
 
-      <main className="mx-auto sm:py-16 container">
+      <Transition as="main" appear={true} show={true}>
         <Author author={author} />
-      </main>
+        <Experience experiences={experiences} />
+      </Transition>
     </>
   );
 }
@@ -30,11 +39,15 @@ export async function getStaticProps({
 }: GetStaticPropsContext) {
   const client = graphcmsClient(preview);
 
-  const { author } = await client.request(getAuthorByEmail, {
+  const { author } = await client.request<IAuthorResponse>(getAuthorByEmail, {
     email: 'emailme@stevencalverley.com',
   });
 
-  if (!author) {
+  const { experiences } = await client.request<IExperienceResponse>(
+    getExperiences
+  );
+
+  if (!author && !experiences) {
     return {
       notFound: true,
     };
@@ -43,6 +56,7 @@ export async function getStaticProps({
   return {
     props: {
       author,
+      experiences,
       preview,
     },
     revalidate: 60,
