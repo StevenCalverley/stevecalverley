@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { useScrollPosition } from '@n8tb1t/use-scroll-position';
+import { useInView } from 'react-intersection-observer';
 import { ICompany, IExperience, IPosition } from '../../lib/types';
 import { Transition } from '@headlessui/react';
 import { ElementRef, Ref, useRef, useState } from 'react';
@@ -83,26 +83,14 @@ function renderExperiences(experiences: IExperience[]): JSX.Element[] {
 }
 
 export default function Experience({ experiences }: ExperienceProps) {
-  const sectionRef = useRef(null);
-  const [show, setShow] = useState(false);
-  useScrollPosition(
-    ({ prevPos, currPos }) => {
-      console.log(window.innerHeight - window.innerHeight / 4 - currPos.y);
-      console.log(window.innerHeight - window.innerHeight / 4 - currPos.y > 0);
-      setShow(window.innerHeight - window.innerHeight / 4 - currPos.y > 0);
-    },
-    [],
-    sectionRef,
-    false,
-    300
-  );
+  const { ref, inView, entry } = useInView({
+    triggerOnce: true,
+    threshold: 1,
+  });
   return (
-    <section
-      className="px-4 pt-8 bg-gray-100 font-display min-h-screen"
-      ref={sectionRef}
-    >
+    <section className="px-4 pt-8 bg-gray-100 font-display">
       <div className="mx-auto max-w-5xl md:py-16 text-blue-900">
-        <h2 className="font-bold text-xl md:text-center">
+        <h2 className="font-bold text-xl md:text-center" ref={ref}>
           &lt;This is &#47;&gt;
           <br />
           My Work Experience
@@ -110,7 +98,7 @@ export default function Experience({ experiences }: ExperienceProps) {
         <Transition
           as="div"
           appear={false}
-          show={show}
+          show={inView}
           className="mt-4 md:mt-12 divide-y md:divide-y-0 divide-blue-900"
         >
           {experiences.length > 0 ? (

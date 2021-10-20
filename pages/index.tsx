@@ -8,7 +8,6 @@ import type {
   IExperience,
   IExperienceResponse,
 } from '../lib/types';
-import { Transition } from '@headlessui/react';
 import Author from '../components/author/author';
 import Experience from '../components/experiences/experiences';
 import { parseExperienceResponse } from '../utils/parseExperienceResponse';
