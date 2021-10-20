@@ -1,8 +1,14 @@
 import { GetStaticPropsContext } from 'next';
 import Head from 'next/head';
 import { graphcmsClient } from '../lib/client';
-import { getAuthorByEmail, getExperiences } from '../lib/queries';
-import type {
+import {
+  getAuthorByEmail,
+  getExperiences,
+  getSkillsByType,
+  getActivities,
+  getEducations,
+} from '../lib/queries';
+import {
   IAuthor,
   IAuthorResponse,
   IExperience,
@@ -11,13 +17,14 @@ import type {
   IActivitiesResponse,
   ISkill,
   ISkillResponse,
+  IEducationResponse,
+  IEducation,
 } from '../lib/types';
 import Author from '../components/author/author';
 import Experience from '../components/experiences/experiences';
 import Skills from '../components/skills/skills';
-import { getSkillsByType } from '../lib/queries/getSkills';
 import Activities from '../components/activities/activities';
-import { getActivities } from '../lib/queries/getActivities';
+import Educations from '../components/educations/educations';
 
 interface IndexProps {
   author: IAuthor;
@@ -27,6 +34,7 @@ interface IndexProps {
     development: ISkill[];
   };
   activities: IActivity[];
+  educations: IEducation[];
 }
 
 export default function Home({
@@ -34,6 +42,7 @@ export default function Home({
   experiences,
   skills,
   activities,
+  educations,
 }: IndexProps) {
   return (
     <>
@@ -45,6 +54,7 @@ export default function Home({
         <Experience experiences={experiences} />
         <Skills skills={skills} />
         <Activities activities={activities} />
+        <Educations educations={educations} />
       </main>
     </>
   );
@@ -77,6 +87,10 @@ export async function getStaticProps({
     }
   );
 
+  const { educations } = await client.request<IEducationResponse>(
+    getEducations
+  );
+
   const { activities } = await client.request<IActivitiesResponse>(
     getActivities
   );
@@ -96,6 +110,7 @@ export async function getStaticProps({
         development: developmentSkills,
       },
       activities,
+      educations,
       preview,
     },
     revalidate: 60,

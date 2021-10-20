@@ -1,14 +1,18 @@
-import { IExperienceRaw, IExperience } from '../lib/types';
+import { IExperience } from '../lib/types';
 import { parsePositions } from './parsePositionsResponse';
 
 export function parseExperienceResponse(
-  experiences: IExperienceRaw[]
+  experiences: IExperience[]
 ): IExperience[] {
   const parsedExperiences: IExperience[] = experiences.map(
-    (experience: IExperienceRaw): IExperience => {
+    (experience: IExperience): IExperience => {
       const parsedPostions = parsePositions(experience.positions);
 
       return {
+        startDate: new Date(experience.startDate as string),
+        endDate: experience.endDate
+          ? new Date(experience.startDate as string)
+          : null,
         company: experience.company,
         positions: parsedPostions,
         responsibilities: experience.responsibilities,

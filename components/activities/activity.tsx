@@ -1,4 +1,3 @@
-import React from 'react';
 import { IActivity } from '../../lib/types';
 import dynamic from 'next/dynamic';
 

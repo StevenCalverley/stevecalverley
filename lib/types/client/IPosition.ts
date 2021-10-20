@@ -1,7 +1,9 @@
+import { ClientDate } from '..';
+
 export interface IPosition {
   title: string;
-  startDate: Date;
-  endDate?: Date;
+  startDate: ClientDate;
+  endDate?: ClientDate;
 }
 
 export interface IPositionRaw {

@@ -3,6 +3,8 @@ import { gql } from 'graphql-request';
 export const getExperiences = gql`
   query MyExperiences {
     experiences(orderBy: startDate_DESC) {
+      startDate
+      endDate
       company {
         name
         website

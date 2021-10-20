@@ -1,18 +1,15 @@
+import { ClientDate } from '..';
 import { ICompany } from './ICompany';
-import { IPosition, IPositionRaw } from './IPosition';
+import { IPosition } from './IPosition';
 
 export interface IExperience {
+  startDate: ClientDate;
+  endDate?: ClientDate;
   company: ICompany;
   positions: IPosition[];
   responsibilities: string[];
 }
 
-export interface IExperienceRaw {
-  company: ICompany;
-  positions: IPositionRaw[];
-  responsibilities: string[];
-}
-
 export interface IExperienceResponse {
-  experiences: IExperienceRaw[];
+  experiences: IExperience[];
 }

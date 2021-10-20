@@ -33,9 +33,9 @@ function renderPosition(
     return (
       <div key={idx}>
         <p className="text-sm">
-          {format(new Date(startDate), 'MMMM yyyy')} -{' '}
+          {format(new Date(startDate as string), 'MMMM yyyy')} -{' '}
           {endDate ? (
-            format(new Date(endDate), 'MMMM yyyy')
+            format(new Date(endDate as string), 'MMMM yyyy')
           ) : (
             <strong>Current</strong>
           )}
