@@ -2,7 +2,6 @@ import { format } from 'date-fns';
 import { useInView } from 'react-intersection-observer';
 import { ICompany, IExperience, IPosition } from '../../lib/types';
 import { Transition } from '@headlessui/react';
-import { ElementRef, Ref, useRef, useState } from 'react';
 
 interface ExperienceProps {
   experiences: IExperience[];
@@ -85,10 +84,10 @@ function renderExperiences(experiences: IExperience[]): JSX.Element[] {
 export default function Experience({ experiences }: ExperienceProps) {
   const { ref, inView, entry } = useInView({
     triggerOnce: true,
-    threshold: 1,
+    rootMargin: '-50% 0px',
   });
   return (
-    <section className="px-4 pt-8 bg-gray-100 font-display">
+    <section className="px-4 pt-8 bg-gray-100 font-display min-h-screen">
       <div className="mx-auto max-w-5xl md:py-16 text-blue-900">
         <h2 className="font-bold text-xl md:text-center" ref={ref}>
           &lt;This is &#47;&gt;
