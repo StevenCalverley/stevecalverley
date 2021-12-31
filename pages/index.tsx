@@ -1,16 +1,46 @@
-import Head from 'next/head';
-import Layout from '../layout/layout';
+import type { NextPage } from "next";
+import { GetStaticProps } from "next";
+import { SWRConfig } from "swr";
+import Head from "next/head";
 
-export default function Home() {
+import { getTopTracks } from "../lib/spotify";
+import type { Track } from "../lib/spotify/types";
+
+import Tracks from "../components/Tracks";
+import NowPlaying from "../components/NowPlaying";
+
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await getTopTracks();
+
+  return {
+    props: {
+      fallback: {
+        "/api/tracks": res,
+      },
+    }, // will be passed to the page component as props
+    revalidate: 60,
+  };
+};
+
+const Home: NextPage<{ fallback: Track[] }> = ({ fallback }) => {
   return (
-    <Layout home>
+    <div>
       <Head>
-        <title>Steven Calverley</title>
+        <title>Tameblemist</title>
+        <meta name="description" content="Tameablemist personal website" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="h-full flex flex-col items-center justify-center">
-        <p className="text-gray-700 text-2xl">Coming Soon</p>
+      <main className="container mx-auto max-w-3xl py-8">
+        <SWRConfig value={{ fallback }}>
+          <Tracks />
+        </SWRConfig>
+        <footer className="mt-8 py-4 border-t">
+          <NowPlaying />
+        </footer>
       </main>
-    </Layout>
+    </div>
   );
-}
+};
+
+export default Home;
