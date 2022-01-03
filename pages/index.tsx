@@ -1,43 +1,41 @@
-import type { NextPage } from "next";
-import { GetStaticProps } from "next";
-import { SWRConfig } from "swr";
-import Head from "next/head";
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import Image from 'next/image';
 
-import { getTopTracks } from "../lib/spotify";
-import type { Track } from "../lib/spotify/types";
+import SteveCalverley from '../public/images/SteveCalverley.jpg';
 
-import Tracks from "../components/Tracks";
-import NowPlaying from "../components/NowPlaying";
-
-export const getStaticProps: GetStaticProps = async () => {
-  const res = await getTopTracks();
-
-  return {
-    props: {
-      fallback: {
-        "/api/tracks": res,
-      },
-    }, // will be passed to the page component as props
-    revalidate: 60,
-  };
-};
-
-const Home: NextPage<{ fallback: Track[] }> = ({ fallback }) => {
+const Home: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Tameblemist</title>
-        <meta name="description" content="Tameablemist personal website" />
+        <title>Steve Calverley</title>
+        <meta name="description" content="Steve Calverley's personal website" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className="container mx-auto max-w-3xl py-8">
-        <SWRConfig value={{ fallback }}>
-          <Tracks />
-        </SWRConfig>
-        <footer className="mt-8 py-4 border-t">
-          <NowPlaying />
-        </footer>
+        <article className="flex">
+          <div className="flex flex-col pr-8">
+            <h1 className="font-bold text-3xl md:text-5xl tracking-tight text-black dark:text-white">
+              Steve Calverley.
+            </h1>
+            <h2 className="mt-2 text-gray-700 dark:text-gray-200 mb-4">
+              Lead Frontend Developer at{' '}
+              <span className="font-semibold">Heffron SMSF Consulting</span>
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 mb-16">
+              Developing software that simplies SMSF admistration and enhance
+              client experience.
+            </p>
+          </div>
+          <div className="w-[80px] sm:w-[176px] relative">
+            <Image
+              src={SteveCalverley}
+              alt="Steve Calverley"
+              className="rounded-full filter grayscale"
+            />
+          </div>
+        </article>
       </main>
     </div>
   );
