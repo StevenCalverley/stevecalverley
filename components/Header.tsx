@@ -3,7 +3,12 @@ import { useRouter } from 'next/router';
 
 import clsx from 'clsx';
 
-const NavItem = ({ href, text }) => {
+type NavItemProps = {
+  href: string;
+  text: string;
+};
+
+const NavItem = ({ href, text }: NavItemProps) => {
   const router = useRouter();
   const isActive = router.asPath === href;
 
