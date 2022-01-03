@@ -24,8 +24,8 @@ const Home: NextPage = () => {
               <span className="font-semibold">Heffron SMSF Consulting</span>
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-16">
-              Developing software that simplies SMSF admistration and enhance
-              client experience.
+              Developing software that simplifies SMSF administration and
+              enhance client experience.
             </p>
           </div>
           <div className="w-[80px] sm:w-[176px] relative">
