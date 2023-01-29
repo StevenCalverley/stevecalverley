@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import SteveCalverley from '../public/images/SteveCalverley.jpg';
 
@@ -21,7 +22,13 @@ const Home: NextPage = () => {
             </h1>
             <h2 className="mt-2 text-gray-700 dark:text-gray-200 mb-4">
               Lead Frontend Developer at{' '}
-              <span className="font-semibold">Heffron SMSF Consulting</span>
+              <span className="font-semibold">
+                <Link href="https://www.heffron.com.au" passHref>
+                  <a target="_blank" rel="noopener noreferrer">
+                    Heffron SMSF Consulting
+                  </a>
+                </Link>
+              </span>
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-16">
               Developing software that simplifies SMSF administration and
