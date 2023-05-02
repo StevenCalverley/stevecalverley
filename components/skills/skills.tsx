@@ -1,7 +1,7 @@
-import { ISkill } from '../../lib/types/client/ISkill';
-import { useInView } from 'react-intersection-observer';
-import { Transition } from '@headlessui/react';
-import Skill from './skill';
+import { ISkill } from "../../lib/types/client/ISkill";
+import { useInView } from "react-intersection-observer";
+import { Transition } from "@headlessui/react";
+import Skill from "./skill";
 
 interface SkillsProps {
   skills: {
@@ -13,7 +13,7 @@ interface SkillsProps {
 export default function Skills({ skills }: SkillsProps): JSX.Element {
   const { ref, inView } = useInView({
     triggerOnce: true,
-    rootMargin: '-50% 0px',
+    rootMargin: "-30% 0px",
   });
   return (
     <section className="px-4 py-8 bg-white font-display min-h-[288px]">
