@@ -1,7 +1,7 @@
-import { format } from 'date-fns';
-import { useInView } from 'react-intersection-observer';
-import { ICompany, IExperience, IPosition } from '../../lib/types';
-import { Transition } from '@headlessui/react';
+import { format } from "date-fns";
+import { useInView } from "react-intersection-observer";
+import { ICompany, IExperience, IPosition } from "../../lib/types";
+import { Transition } from "@headlessui/react";
 
 interface ExperienceProps {
   experiences: IExperience[];
@@ -33,9 +33,9 @@ function renderPosition(
     return (
       <div key={idx}>
         <p className="text-sm">
-          {format(new Date(startDate as string), 'MMMM yyyy')} -{' '}
+          {format(new Date(startDate as string), "MMMM yyyy")} -{" "}
           {endDate ? (
-            format(new Date(endDate as string), 'MMMM yyyy')
+            format(new Date(endDate as string), "MMMM yyyy")
           ) : (
             <strong>Current</strong>
           )}
@@ -86,7 +86,7 @@ export default function Experience({
 }: ExperienceProps): JSX.Element {
   const { ref, inView } = useInView({
     triggerOnce: true,
-    rootMargin: '-50% 0px',
+    rootMargin: "-30% 0px",
   });
   return (
     <section className="px-4 pt-8 bg-gray-100 font-display min-h-[800px]">
