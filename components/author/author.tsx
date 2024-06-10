@@ -1,6 +1,6 @@
-import { Transition } from '@headlessui/react';
-import type { IAuthor } from '../../lib/types';
-import AuthorDetail from './authorDetail';
+import { Transition } from "@headlessui/react";
+import type { IAuthor } from "../../lib/types";
+import AuthorDetail from "./authorDetail";
 
 interface IAuthorProps {
   author: IAuthor;
@@ -17,6 +17,7 @@ export default function Author({ author }: IAuthorProps) {
         className="relative md:mx-auto max-w-5xl md:mt-12 min-h-[200px] md:min-h-[288px] font-bold text-blue-900 font-display"
       >
         <Transition.Child
+          as="span"
           enter="transform-gpu transition ease-in-out duration-[2000ms]"
           enterFrom="opacity-0 md:-translate-x-52"
           enterTo="opacity-100 md:translate-x-0"
@@ -24,6 +25,7 @@ export default function Author({ author }: IAuthorProps) {
         ></Transition.Child>
         <div className="relative pt-12 md:pt-20 px-4">
           <Transition.Child
+            as="div"
             enter="transform-gpu transition ease-in-out duration-[2000ms]"
             enterFrom="opacity-0 -translate-y-52 md:translate-y-0 md:-translate-x-52"
             enterTo="opacity-100 translate-y-0 md:-translate-x-0"

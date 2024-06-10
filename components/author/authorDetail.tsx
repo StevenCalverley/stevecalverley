@@ -1,9 +1,9 @@
 import {
-  DeviceMobileIcon,
-  InboxInIcon,
+  DevicePhoneMobileIcon,
+  InboxIcon,
   LinkIcon,
-} from '@heroicons/react/outline';
-import type { IAuthor } from '../../lib/types';
+} from "@heroicons/react/24/solid";
+import type { IAuthor } from "../../lib/types";
 
 interface AuthorDetailProps {
   author: IAuthor;
@@ -13,10 +13,10 @@ interface AuthorDetailProps {
 export default function AuthorDetail({ author, className }: AuthorDetailProps) {
   return (
     <>
-      <dl className={`text-sm space-y-2 ${className ? ` ${className}` : ''}`}>
+      <dl className={`text-sm space-y-2 ${className ? ` ${className}` : ""}`}>
         {author.contact && (
           <div className="flex items-center space-x-2">
-            <DeviceMobileIcon className="h-8 w-8 text-blue-900" />
+            <DevicePhoneMobileIcon className="h-8 w-8 text-blue-900" />
             <div>
               <dd className="font-bold text-blue-900">Phone.</dd>
               <dt className="font-light">{author.contact}</dt>
@@ -25,7 +25,7 @@ export default function AuthorDetail({ author, className }: AuthorDetailProps) {
         )}
         {author.email && (
           <div className="flex items-center space-x-2">
-            <InboxInIcon className="h-8 w-8 text-blue-900" />
+            <InboxIcon className="h-8 w-8 text-blue-900" />
             <div>
               <dd className="font-bold text-blue-900">Email.</dd>
               <dt className="font-light">{author.email}</dt>
