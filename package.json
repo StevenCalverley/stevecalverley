@@ -30,5 +30,6 @@
     "singleQuote": true,
     "tabWidth": 2,
     "trailingComma": "none"
-  }
+  },
+  "packageManager": "yarn@4.4.0"
 }
