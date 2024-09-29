@@ -17,7 +17,7 @@ export const getStaticProps: GetStaticProps = async () => {
         '/api/tracks': res
       }
     }, // will be passed to the page component as props
-    revalidate: 60
+    revalidate: 3600
   };
 };
 
