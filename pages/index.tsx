@@ -20,22 +20,6 @@ const Home: NextPage = () => {
             <h1 className="font-bold text-3xl md:text-5xl tracking-tight text-black dark:text-white">
               Steve Calverley.
             </h1>
-            <h2 className="mt-2 text-gray-700 dark:text-gray-200 mb-4">
-              Technical Product Manager at{' '}
-              <span className="font-semibold">
-                <Link
-                  href="https://chl.global/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  CHL Group
-                </Link>
-              </span>
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-16">
-              Developing software that simplifies the peer to peer market
-              withing the camping industry.
-            </p>
           </div>
           <div className="w-[80px] sm:w-[176px] relative">
             <Image
